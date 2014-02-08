@@ -1,5 +1,7 @@
 <?php
     var_dump($_POST);
+    var_dump($_SERVER);
+
     // 環境変数参照
     $vcap_services = getenv('VCAP_SERVICES');
     if($vcap_services === false){
