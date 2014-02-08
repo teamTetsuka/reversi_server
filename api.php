@@ -1,6 +1,5 @@
 <?php
 $params = explode("/", $_SERVER['PATH_INFO']);
-var_dump($params);
 
 // 環境変数参照
 $vcap_services = getenv('VCAP_SERVICES');
@@ -23,14 +22,21 @@ try {
         )
     );
 } catch (Exception $e) {
-    //print_r( $e );
     exit();
 }
 
-$sql = "SELECT * FROM fixtures WHERE quantity=1";
-$params = array();
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-var_dump($results);
+// RESTful的な
+switch($params[1]){
+    case 's':
+        $stmt = $pdo->prepare("SELECT * FROM oppose WHERE quantity=1 and rownum=1");
+        $stmt->execute(array());
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        break;
+    case 'g':
+        $stmt = $pdo->prepare("SELECT * FROM oppose WHERE id=$params[2]");
+        $stmt->execute(array());
+        echo $json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        break;
+    default:
+        echo '不正なアクセスです';
+}
