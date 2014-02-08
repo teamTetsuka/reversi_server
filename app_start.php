@@ -30,6 +30,8 @@
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    var_dump($results);
 ?>
 
 <?php
