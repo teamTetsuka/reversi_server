@@ -24,9 +24,13 @@ try{
 }
 
 // table作成
-$sql = "CREATE TABLE bracket (id mediumint not null text, quantity int, p int, r int, c int, primary key(id))";
+$sql = "CREATE TABLE bracket (id mediumint not null, quantity int, p int, r int, c int, primary key(id))";
 $stmt = $pdo->prepare($sql);
-$stmt->execute(array());
+if($stmt->execute(array())){
+    echo "テーブル作成成功\n";
+} else{
+    echo "テーブル作成失敗\n";
+}
 
 // ダミーデータinsert
 $sql = "INSERT INTO bracket (id, quantity, p, r, c) VALUES (:id, :quantity, :p)";
@@ -38,4 +42,6 @@ $params = array(
 $stmt = $pdo->prepare($sql);
 if($stmt->execute($params)){
     echo "ダミーデータ登録成功\n";
+} else{
+    echo "ダミーデータ登録失敗\n";
 }
