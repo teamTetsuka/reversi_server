@@ -33,7 +33,7 @@ if($stmt->execute(array())){
 }
 
 // ダミーデータinsert
-$sql = "INSERT INTO bracket (id, quantity, p, r, c) VALUES (:id, :quantity, :p)";
+$sql = "INSERT INTO bracket (id, quantity, p) VALUES (:id, :quantity, :p)";
 $params = array(
     'id' => 'hoge',
     'quantity' => 2,
