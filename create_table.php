@@ -27,3 +27,15 @@ try{
 $sql = "CREATE TABLE bracket (id mediumint not null text, quantity int, p int, r int, c int, primary key(id))";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(array());
+
+// ダミーデータinsert
+$sql = "INSERT INTO bracket (id, quantity, p, r, c) VALUES (:id, :quantity, :p)";
+$params = array(
+    'id' => 'hoge',
+    'quantity' => 2,
+    'p' => 1
+);
+$stmt = $pdo->prepare($sql);
+if($stmt->execute($params)){
+    echo "ダミーデータ登録成功\n";
+}
