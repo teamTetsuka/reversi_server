@@ -57,7 +57,7 @@ if($stmt->execute($params)){
 }
 
 // select
-$sql = "SELECT * FROM bracket WHERE p=:p";
+$sql = "SELECT * FROM bracket";
 $params = array('p' => 3);
 $stmt = $pdo->prepare($sql);
 if($stmt->execute($params)){
