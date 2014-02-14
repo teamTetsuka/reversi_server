@@ -60,7 +60,7 @@ if($stmt->execute($params)){
 $sql = "SELECT * FROM bracket";
 $stmt = $pdo->prepare($sql);
 if($stmt->execute(array())){
-    var_dump(mysql_fetch_assoc(mysql_query($sql)));
+    var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
 } else{
     echo "ダミーデータ取得失敗<br />";
 }
