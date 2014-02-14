@@ -48,7 +48,7 @@ if($stmt->execute($params)){
 
 // update
 $sql = "UPDATE bracket SET p=:p WHERE id=:id";
-$params = array('p' => 2, 'id' => 0);
+$params = array('p' => 1, 'id' => 0);
 $stmt = $pdo->prepare($sql);
 if($stmt->execute($params)){
     echo "ダミーデータ更新成功<br />";
