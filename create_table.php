@@ -55,3 +55,12 @@ if($stmt->execute($params)){
 } else{
     echo "ダミーデータ更新失敗<br />";
 }
+
+// select
+$sql = "SELECT * FROM bracket";
+$stmt = $pdo->prepare($sql);
+if($result = $stmt->execute(array())){
+    var_dump($result);
+} else{
+    echo "ダミーデータ取得失敗<br />";
+}
