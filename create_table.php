@@ -45,3 +45,12 @@ if($stmt->execute($params)){
 } else{
     echo "ダミーデータ登録失敗\n";
 }
+
+// update
+$sql = "UPDATE bracket SET p=`2` WHERE id=`hoge`";
+$stmt = $pdo->prepare($sql);
+if($stmt->execute(array())){
+    echo "ダミーデータ更新成功<br />";
+} else{
+    echo "ダミーデータ更新失敗<br />";
+}
