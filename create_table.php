@@ -27,9 +27,9 @@ try{
 $sql = "CREATE TABLE bracket (id mediumint not null, quantity int, p int, r int, c int, primary key(id))";
 $stmt = $pdo->prepare($sql);
 if($stmt->execute(array())){
-    echo "テーブル作成成功\n";
+    echo "テーブル作成成功<br />";
 } else{
-    echo "テーブル作成失敗\n";
+    echo "テーブル作成失敗<br />";
 }
 
 // ダミーデータinsert
@@ -41,15 +41,16 @@ $params = array(
 );
 $stmt = $pdo->prepare($sql);
 if($stmt->execute($params)){
-    echo "ダミーデータ登録成功\n";
+    echo "ダミーデータ登録成功<br />";
 } else{
-    echo "ダミーデータ登録失敗\n";
+    echo "ダミーデータ登録失敗<br />";
 }
 
 // update
-$sql = "UPDATE bracket SET p=`2` WHERE id=`hoge`";
+$sql = "UPDATE bracket SET p=:p WHERE id=:id";
+$params = array('p' => 2, 'id' => 'hoge');
 $stmt = $pdo->prepare($sql);
-if($stmt->execute(array())){
+if($stmt->execute($params)){
     echo "ダミーデータ更新成功<br />";
 } else{
     echo "ダミーデータ更新失敗<br />";
