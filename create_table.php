@@ -57,9 +57,10 @@ if($stmt->execute($params)){
 }
 
 // select
-$sql = "SELECT * FROM bracket";
+$sql = "SELECT * FROM bracket WHERE p=:p";
+$params = array('p' => 3);
 $stmt = $pdo->prepare($sql);
-if($stmt->execute(array())){
+if($stmt->execute($params)){
     var_dump(json_encode($stmt->fetchAll(PDO::FETCH_ASSOC)));
 } else{
     echo "ダミーデータ取得失敗<br />";
