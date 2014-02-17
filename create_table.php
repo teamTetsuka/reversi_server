@@ -24,7 +24,7 @@ try{
 }
 
 // table作成
-$sql = "CREATE TABLE bracket (id mediumint not null, quantity int, p int, r int, c int, primary key(id))";
+$sql = "CREATE TABLE bracket (id mediumint not null auto_increment, quantity int, p int, r int, c int, primary key(id))";
 $stmt = $pdo->prepare($sql);
 if($stmt->execute(array())){
     echo "テーブル作成成功<br />";
