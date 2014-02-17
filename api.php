@@ -43,7 +43,7 @@ switch($params[1]){
         $mod_value = array();
         break;
     case 'g':
-        $sql = "SELECT * FROM bracket WHERE id=:id");
+        $sql = "SELECT * FROM bracket WHERE id=:id";
         $mod_value = array('id' => $_GET['id']);
         break;
     case 'p':
