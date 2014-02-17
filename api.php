@@ -41,7 +41,8 @@ switch($params[1]){
         $mod_value = array();
         $stmt = $pdo->prepare("SELECT * FROM bracket WHERE quantity=1 and rownum=1");
         $stmt->execute(array());
-        if(empty($stmt->fetchAll(PDO::FETCH_ASSOC)) || $stmt->fetchAll(PDO::FETCH_ASSOC) == false){
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(empty($result) || $result == false){
             $sql = "INSERT INTO bracket (quantity, p) VALUES (1, 1)";
             $mod_value = array();
         }
