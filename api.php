@@ -38,18 +38,28 @@ if(!isset($params[1])){
 
 switch($params[1]){
     case 's':
-        $stmt = $pdo->prepare("SELECT * FROM oppose WHERE quantity=1 and rownum=1");
-        $stmt->execute(array());
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        $sql = "SELECT * FROM bracket WHERE quantity=1 and rownum=1";
+        $mod_value = array();
         break;
     case 'g':
-        $stmt = $pdo->prepare("SELECT * FROM oppose WHERE id=$params[2]");
-        $stmt->execute(array());
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        $sql = "SELECT * FROM bracket WHERE id=:id");
+        $mod_value = array('id' => $_GET['id']);
         break;
     case 'p':
+        $sql = "UPDATE bracket SET p=:p, r=:r, c=:c WHERE id=:id";
+        $mod_value = array(
+            'id' => $_GET['id'],
+            'p'  => $_GET['p'],
+            'r'  => $_GET['r'],
+            'c'  => $_GET['c']
+        );
         break;
     default:
+        $sql = "";
+        $mod_value = array();
         echo '不正なアクセスです';
 }
-var_dump($this->RequestHandler->isPost());
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($mod_value);
+echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
