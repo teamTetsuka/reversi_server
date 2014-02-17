@@ -37,10 +37,9 @@ if(!isset($params[1])){
 
 switch($params[1]){
     case 's':
-        echo 'hogehoge';
         $sql = "SELECT * FROM bracket WHERE quantity=1 and rownum=1";
         $mod_value = array();
-        $stmt = $pdo->prepare();
+        $stmt = $pdo->prepare($sql);
         $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         var_dump($result);
