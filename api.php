@@ -42,6 +42,7 @@ switch($params[1]){
         $stmt = $pdo->prepare();
         $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($result);
         if(empty($result) || $result == false){
             $sql = "INSERT INTO bracket (quantity, p) VALUES (:quantity, :p)";
             $mod_value = array('quantity' => 1, 'p' => 1);
