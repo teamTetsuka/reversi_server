@@ -37,8 +37,8 @@ if(!isset($params[1])){
 
 switch($params[1]){
     case 's':
-        $sql = "SELECT * FROM bracket WHERE quantity=1 and rownum=1";
-        $mod_value = array();
+        $sql = "SELECT * FROM bracket WHERE quantity=:quantity and rownum=:rownum";
+        $mod_value = array('quantity' => 1, 'rownum' => 1);
         $stmt = $pdo->prepare($sql);
         $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
