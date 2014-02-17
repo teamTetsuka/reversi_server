@@ -1,6 +1,6 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] != 'GET'){
-    echo json_encode(array('result' => 'error'));
+    echo json_encode(array());
 }
 
 $params = explode("/", $_SERVER['PATH_INFO']);
@@ -31,7 +31,7 @@ try {
 
 // RESTful的な
 if(!isset($params[1])){
-    echo json_encode(array('result' => 'error'));
+    echo json_encode(array();
     exit();
 }
 
@@ -39,12 +39,12 @@ switch($params[1]){
     case 's':
         $sql = "SELECT * FROM bracket WHERE quantity=1 and rownum=1";
         $mod_value = array();
-        $stmt = $pdo->prepare("SELECT * FROM bracket WHERE quantity=1 and rownum=1");
-        $stmt->execute(array());
+        $stmt = $pdo->prepare();
+        $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if(empty($result) || $result == false){
-            $sql = "INSERT INTO bracket (quantity, p) VALUES (1, 1)";
-            $mod_value = array();
+            $sql = "INSERT INTO bracket (quantity, p) VALUES (:quantity, :p)";
+            $mod_value = array('quantity' => 1, 'p' => 1);
         }
         break;
     case 'g':
@@ -61,8 +61,7 @@ switch($params[1]){
         );
         break;
     default:
-        echo jsonencode(array('result' => 'error'));
-        echo '不正なアクセスです';
+        echo jsonencode(array());
         exit();
 }
 
