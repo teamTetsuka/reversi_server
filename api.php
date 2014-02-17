@@ -49,13 +49,11 @@ switch($params[1]){
             break;
         }
 
-        var_dump($result);
-
         // いた場合はレコードを更新
         $stmt = $pdo->prepare("UPDATE bracket SET quantity=:quantity, p=:p WHERE id=:id");
-        $stmt->execute(array('quantity' => 2, 'p' => 2, 'id' => $result['id']));
+        $stmt->execute(array('quantity' => 2, 'p' => 2, 'id' => $result[0]['id']));
         $stmt = $pdo->prepare("SELECT * FROM bracket WHERE id=:id");
-        $stmt->execute(array('id' => $result['id']));
+        $stmt->execute(array('id' => $result[0]['id']));
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         exit();
     case 'g':
