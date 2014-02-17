@@ -37,17 +37,24 @@ if(!isset($params[1])){
 
 switch($params[1]){
     case 's':
+        // 相手待ちがいるか
         $sql = "SELECT * FROM bracket WHERE quantity=:quantity LIMIT 1";
         $mod_value = array('quantity' => 1);
         $stmt = $pdo->prepare($sql);
         $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//        if(empty($result) || $result == false){
-//            $sql = "INSERT INTO bracket (quantity, p) VALUES (:quantity, :p)";
-//            $mod_value = array('quantity' => 1, 'p' => 1);
-//            break;
-//        }
-        echo json_encode($result);
+        if(empty($result) || $result == false){ // いなかった場合は新規レコードを作成
+            $sql = "INSERT INTO bracket (quantity, p) VALUES (:quantity, :p)";
+            $mod_value = array('quantity' => 1, 'p' => 1);
+            break;
+        }
+
+        // いた場合はレコードを更新
+        $stmt = $pdo->prepare("UPDATE bracket SET quantity=:quantity, p=:p WHERE id=:id");
+        $stmt->execute(array('quantity' => 2, 'p' => 2, 'id' => $result['id']));
+        $stmt = $pdo->prepare("SELECT * FROM bracket WHERE id=:id");
+        $stmt->execute(array('id' => $result['id']));
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         exit();
     case 'g':
         $sql = "SELECT * FROM bracket WHERE id=:id";
