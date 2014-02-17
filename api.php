@@ -31,7 +31,7 @@ try {
 
 // RESTful的な
 if(!isset($params[1])){
-    echo json_encode(array();
+    echo json_encode(array());
     exit();
 }
 
