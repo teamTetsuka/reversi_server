@@ -45,7 +45,9 @@ switch($params[1]){
         if(empty($result) || $result == false){
             $sql = "INSERT INTO bracket (quantity, p) VALUES (:quantity, :p)";
             $mod_value = array('quantity' => 1, 'p' => 1);
+            break;
         }
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
     case 'g':
         $sql = "SELECT * FROM bracket WHERE id=:id";
