@@ -49,6 +49,8 @@ switch($params[1]){
             break;
         }
 
+        var_dump($result);
+
         // いた場合はレコードを更新
         $stmt = $pdo->prepare("UPDATE bracket SET quantity=:quantity, p=:p WHERE id=:id");
         $stmt->execute(array('quantity' => 2, 'p' => 2, 'id' => $result['id']));
