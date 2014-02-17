@@ -68,7 +68,7 @@ if($stmt->execute($params)){
 
 $sql = "ALTER TABLE bracket CHANGE id id INT(4) AUTO_INCREMENT";
 $stmt = $pdo->prepare($sql);
-if($stmt->execute(array()){
+if($stmt->execute(array())){
     echo "テーブル設定更新成功";
 } else{
     echo "テーブル設定更新失敗";
