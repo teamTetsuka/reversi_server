@@ -42,13 +42,13 @@ switch($params[1]){
         $stmt = $pdo->prepare($sql);
         $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if(empty($result) || $result == false){
-            $sql = "INSERT INTO bracket (quantity, p) VALUES (:quantity, :p)";
-            $mod_value = array('quantity' => 1, 'p' => 1);
-            break;
-        }
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
+//        if(empty($result) || $result == false){
+//            $sql = "INSERT INTO bracket (quantity, p) VALUES (:quantity, :p)";
+//            $mod_value = array('quantity' => 1, 'p' => 1);
+//            break;
+//        }
+        echo json_encode($result);
+        exit();
     case 'g':
         $sql = "SELECT * FROM bracket WHERE id=:id";
         $mod_value = array('id' => $_GET['id']);
