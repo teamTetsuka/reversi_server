@@ -15,8 +15,7 @@ if($vcap_services === false){
 $vcap_services_json = json_decode($vcap_services);
 $db = $vcap_services_json->{"mysql-5.1"}[0]->credentials;
 
-// DB接続
-$pdo = null;
+// DB接続 $pdo = null;
 try {
     $pdo = new PDO(
         "mysql:host={$db->host};port={$db->port};dbname={$db->name}",
@@ -32,14 +31,20 @@ try {
 
 // RESTful的な
 if(!isset($params[1])){
-    echo '不正なアクセスです';
+    echo json_encode(array('result' => 'error'));
+    exit();
 }
 
-var_dump($_GET);
 switch($params[1]){
     case 's':
         $sql = "SELECT * FROM bracket WHERE quantity=1 and rownum=1";
         $mod_value = array();
+        $stmt = $pdo->prepare("SELECT * FROM bracket WHERE quantity=1 and rownum=1");
+        $stmt->execute(array());
+        if(empty($stmt->fetchAll(PDO::FETCH_ASSOC)) || $stmt->fetchAll(PDO::FETCH_ASSOC) == false){
+            $sql = "INSERT INTO bracket (quantity, p) VALUES (1, 1)";
+            $mod_value = array();
+        }
         break;
     case 'g':
         $sql = "SELECT * FROM bracket WHERE id=:id";
@@ -55,12 +60,10 @@ switch($params[1]){
         );
         break;
     default:
-        $sql = "";
-        $mod_value = array();
+        echo jsonencode(array('result' => 'error'));
         echo '不正なアクセスです';
+        exit();
 }
-
-var_dump($sql);
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($mod_value);
