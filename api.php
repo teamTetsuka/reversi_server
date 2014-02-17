@@ -1,6 +1,4 @@
 <?php
-//var_dump($_SERVER);
-
 if($_SERVER['REQUEST_METHOD'] != 'GET'){
     echo json_encode(array('result' => 'error'));
 }
@@ -15,6 +13,7 @@ if($vcap_services === false){
 
 // 環境変数からDB設定を取得
 $vcap_services_json = json_decode($vcap_services);
+$db = $vcap_services_json->{"mysql-5.1"}[0]->credentials;
 
 // DB接続
 $pdo = null;
