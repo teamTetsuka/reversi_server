@@ -36,6 +36,7 @@ if(!isset($params[1])){
     echo '不正なアクセスです';
 }
 
+var_dump($_GET);
 switch($params[1]){
     case 's':
         $sql = "SELECT * FROM bracket WHERE quantity=1 and rownum=1";
@@ -59,6 +60,8 @@ switch($params[1]){
         $mod_value = array();
         echo '不正なアクセスです';
 }
+
+var_dump($sql);
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($mod_value);
