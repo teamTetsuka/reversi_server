@@ -33,28 +33,28 @@ if($stmt->execute(array())){
 }
 
 // ダミーデータinsert
-$sql = "INSERT INTO bracket (id, quantity, p) VALUES (:id, :quantity, :p)";
-$params = array(
-    'id' => 'hoge',
-    'quantity' => 2,
-    'p' => 1
-);
-$stmt = $pdo->prepare($sql);
-if($stmt->execute($params)){
-    echo "ダミーデータ登録成功<br />";
-} else{
-    echo "ダミーデータ登録失敗<br />";
-}
+//$sql = "INSERT INTO bracket (id, quantity, p) VALUES (:id, :quantity, :p)";
+//$params = array(
+//    'id' => 'hoge',
+//    'quantity' => 2,
+//    'p' => 1
+//);
+//$stmt = $pdo->prepare($sql);
+//if($stmt->execute($params)){
+//    echo "ダミーデータ登録成功<br />";
+//} else{
+//    echo "ダミーデータ登録失敗<br />";
+//}
 
 // update
-$sql = "UPDATE bracket SET p=:p WHERE id=:id";
-$params = array('p' => 2, 'id' => 0);
-$stmt = $pdo->prepare($sql);
-if($stmt->execute($params)){
-    echo "ダミーデータ更新成功<br />";
-} else{
-    echo "ダミーデータ更新失敗<br />";
-}
+//$sql = "UPDATE bracket SET p=:p WHERE id=:id";
+//$params = array('p' => 2, 'id' => 0);
+//$stmt = $pdo->prepare($sql);
+//if($stmt->execute($params)){
+//    echo "ダミーデータ更新成功<br />";
+//} else{
+//    echo "ダミーデータ更新失敗<br />";
+//}
 
 // select
 $sql = "SELECT * FROM bracket";
@@ -69,38 +69,38 @@ if($stmt->execute($params)){
 }
 echo "<br />";
 
-$sql = "ALTER TABLE bracket CHANGE id id INT(4) AUTO_INCREMENT";
-$stmt = $pdo->prepare($sql);
-if($stmt->execute(array())){
-    echo "テーブル設定更新成功";
-} else{
-    echo "テーブル設定更新失敗";
-}
-echo "<br />";
+//$sql = "ALTER TABLE bracket CHANGE id id INT(4) AUTO_INCREMENT";
+//$stmt = $pdo->prepare($sql);
+//if($stmt->execute(array())){
+//    echo "テーブル設定更新成功";
+//} else{
+//    echo "テーブル設定更新失敗";
+//}
+//echo "<br />";
 
-$sql = "ALTER TABLE bracket CHANGE COLUMN quantity pc INT(1)";
-$stmt = $pdo->prepare($sql);
-if($stmt->execute(array())){
-    echo "列名をquantityからpcへ変更成功";
-} else{
-    echo "列名をquantityからpcへ変更失敗";
-}
-echo "<br />";
+//$sql = "ALTER TABLE bracket CHANGE COLUMN quantity pc INT(1)";
+//$stmt = $pdo->prepare($sql);
+//if($stmt->execute(array())){
+//    echo "列名をquantityからpcへ変更成功";
+//} else{
+//    echo "列名をquantityからpcへ変更失敗";
+//}
+//echo "<br />";
 
-$sql = "ALTER TABLE bracket ADD COLUMN n INT(2)";
-$stmt = $pdo->prepare($sql);
-if($stmt->execute(array())){
-    echo "nを追加成功";
-} else{
-    echo "nを追加失敗";
-}
-echo "<br />";
+//$sql = "ALTER TABLE bracket ADD COLUMN n INT(2)";
+//$stmt = $pdo->prepare($sql);
+//if($stmt->execute(array())){
+//    echo "nを追加成功";
+//} else{
+//    echo "nを追加失敗";
+//}
+//echo "<br />";
 
-$sql = "DELETE FROM bracket";
-$stmt = $pdo->prepare($sql);
-if($stmt->execute(array())){
-    echo "レコードの削除に成功";
-} else{
-    echo "レコードの削除に失敗";
-}
-echo "<br />";
+//$sql = "DELETE FROM bracket";
+//$stmt = $pdo->prepare($sql);
+//if($stmt->execute(array())){
+//    echo "レコードの削除に成功";
+//} else{
+//    echo "レコードの削除に失敗";
+//}
+//echo "<br />";
