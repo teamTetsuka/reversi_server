@@ -1,6 +1,9 @@
 <?php
+function json($array = array('result' => 'failure')){
+}
+
 if($_SERVER['REQUEST_METHOD'] != 'GET'){
-    echo json_encode(array());
+    echo json_encode(array('result' => 'failure'));
 }
 
 $params = explode("/", $_SERVER['PATH_INFO']);
@@ -44,16 +47,17 @@ switch($params[1]){
         $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if(empty($result) || $result == false){ // いなかった場合は新規レコードを作成
-            $sql = "INSERT INTO bracket (pc, p, n) VALUES (:pc, :p, :n)";
-            $mod_value = array('pc' => 1, 'p' => 1, 'n' => 0);
-            break;
+            $stmt = $pdo->prepare("INSERT INTO bracket (pc, p, n) VALUES (:pc, :p, :n)");
+            $stmt->execute(array('pc' => 1, 'p' => 1, 'n' => 0));
+            $stmt = $pdo->prepare("SELECT * FROM bracket WHERE pc=:pc LIMIT 1");
+            $stmt->execute(array('pc' => 1));
+        } else{ // いた場合はレコードを更新
+            $stmt = $pdo->prepare("UPDATE bracket SET pc=:pc, p=:p, n=:n WHERE id=:id");
+            $stmt->execute(array('pc' => 2, 'p' => 2, 'n' => 1, 'id' => $result[0]['id']));
+            $stmt = $pdo->prepare("SELECT * FROM bracket WHERE id=:id");
+            $stmt->execute(array('id' => $result[0]['id']));
         }
 
-        // いた場合はレコードを更新
-        $stmt = $pdo->prepare("UPDATE bracket SET pc=:pc, p=:p WHERE id=:id");
-        $stmt->execute(array('pc' => 2, 'p' => 2, 'id' => $result[0]['id']));
-        $stmt = $pdo->prepare("SELECT * FROM bracket WHERE id=:id");
-        $stmt->execute(array('id' => $result[0]['id']));
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         exit();
     case 'g':
