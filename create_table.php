@@ -73,6 +73,7 @@ if($stmt->execute(array())){
 } else{
     echo "テーブル設定更新失敗";
 }
+echo "<br />";
 
 $sql = "ALTER TABLE bracket CHANGE COLUMN quantity pc INT(1)";
 $stmt = $pdo->prepare($sql);
@@ -81,11 +82,13 @@ if($stmt->execute(array())){
 } else{
     echo "列名をquantityからpcへ変更失敗";
 }
+echo "<br />";
 
-$sql = "ALTER TABLE bracket ADD COLUMN n INT(2) SET DEFAULT 0";
+$sql = "ALTER TABLE bracket ADD COLUMN n INT(2)";
 $stmt = $pdo->prepare($sql);
 if($stmt->execute(array())){
     echo "nを追加成功";
 } else{
     echo "nを追加失敗";
 }
+echo "<br />";
