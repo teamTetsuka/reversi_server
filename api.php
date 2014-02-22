@@ -62,7 +62,7 @@ switch($params[1]){
         $mod_value = array('id' => $_GET['id']);
         $stmt = $pdo->prepare($sql);
         $stmt->execute($mod_value);
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC), JSON_FORCE_OBJECT);
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         exit();
     case 'p':
         $sql = "UPDATE bracket SET p=:p, r=:r, c=:c WHERE id=:id";
