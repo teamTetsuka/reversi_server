@@ -77,5 +77,5 @@ switch($params[1]){
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($mod_value);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($result[0]);
+var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+//echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
