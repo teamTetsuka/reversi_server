@@ -38,20 +38,20 @@ if(!isset($params[1])){
 switch($params[1]){
     case 's':
         // 相手待ちがいるか
-        $sql = "SELECT * FROM bracket WHERE quantity=:quantity LIMIT 1";
-        $mod_value = array('quantity' => 1);
+        $sql = "SELECT * FROM bracket WHERE pc=:pc LIMIT 1";
+        $mod_value = array('pc' => 1);
         $stmt = $pdo->prepare($sql);
         $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if(empty($result) || $result == false){ // いなかった場合は新規レコードを作成
-            $sql = "INSERT INTO bracket (quantity, p) VALUES (:quantity, :p)";
-            $mod_value = array('quantity' => 1, 'p' => 1);
+            $sql = "INSERT INTO bracket (pc, p, n) VALUES (:pc, :p, :n)";
+            $mod_value = array('pc' => 1, 'p' => 1, 'n' => 0);
             break;
         }
 
         // いた場合はレコードを更新
-        $stmt = $pdo->prepare("UPDATE bracket SET quantity=:quantity, p=:p WHERE id=:id");
-        $stmt->execute(array('quantity' => 2, 'p' => 2, 'id' => $result[0]['id']));
+        $stmt = $pdo->prepare("UPDATE bracket SET pc=:pc, p=:p WHERE id=:id");
+        $stmt->execute(array('pc' => 2, 'p' => 2, 'id' => $result[0]['id']));
         $stmt = $pdo->prepare("SELECT * FROM bracket WHERE id=:id");
         $stmt->execute(array('id' => $result[0]['id']));
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
