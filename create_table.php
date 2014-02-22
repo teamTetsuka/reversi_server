@@ -95,3 +95,12 @@ if($stmt->execute(array())){
     echo "nを追加失敗";
 }
 echo "<br />";
+
+$sql = "DELETE FROM bracket";
+$stmt = $pdo->prepare($sql);
+if($stmt->execute(array())){
+    echo "レコードの削除に成功";
+} else{
+    echo "レコードの削除に失敗";
+}
+echo "<br />";

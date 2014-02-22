@@ -38,6 +38,7 @@ if(!isset($params[1])){
 switch($params[1]){
     case 's':
         // 相手待ちがいるか
+        $pdo->beginTransaction();
         $sql = "SELECT * FROM bracket WHERE pc=:pc LIMIT 1";
         $mod_value = array('pc' => 1);
         $stmt = $pdo->prepare($sql);
@@ -54,6 +55,7 @@ switch($params[1]){
             $stmt = $pdo->prepare("SELECT * FROM bracket WHERE id=:id");
             $stmt->execute(array('id' => $result[0]['id']));
         }
+        $pdo->commit();
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result[0]);
@@ -73,6 +75,7 @@ switch($params[1]){
         $stmt->execute($mod_value);
         $tmp = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $pdo->beginTransaction();
         $sql = "UPDATE bracket SET p=:p, r=:r, c=:c, n=n+1 WHERE id=:id";
         $mod_value = array(
             'id' => $_GET['id'],
@@ -83,6 +86,8 @@ switch($params[1]){
         );
         $stmt = $pdo->prepare($sql);
         $stmt->execute($mod_value);
+        $pdo->commit();
+
         $sql = "SELECT * FROM bracket WHERE id=:id";
         $mod_value = array('id' => $_GET['id']);
         $stmt = $pdo->prepare($sql);
