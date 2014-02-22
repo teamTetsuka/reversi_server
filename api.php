@@ -73,7 +73,7 @@ switch($params[1]){
         $stmt->execute($mod_value);
         $tmp = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $sql = "UPDATE bracket SET p=:p, r=:r, c=:c WHERE id=:id";
+        $sql = "UPDATE bracket SET p=:p, r=:r, c=:c, n=:n WHERE id=:id";
         $mod_value = array(
             'id' => $_GET['id'],
             'p'  => $_GET['p'],
