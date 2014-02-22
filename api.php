@@ -67,17 +67,28 @@ switch($params[1]){
         echo json_encode($result[0]);
         exit();
     case 'p':
+        $sql = "SELECT * FROM bracket WHERE id=:id";
+        $mod_value = array('id' => $_GET['id']);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($mod_value);
+        $tmp = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $sql = "UPDATE bracket SET p=:p, r=:r, c=:c WHERE id=:id";
         $mod_value = array(
             'id' => $_GET['id'],
             'p'  => $_GET['p'],
             'r'  => $_GET['r'],
-            'c'  => $_GET['c']
+            'c'  => $_GET['c'],
+            'n'  => $tmp[0]['n'] + 1
         );
         $stmt = $pdo->prepare($sql);
         $stmt->execute($mod_value);
+        $sql = "SELECT * FROM bracket WHERE id=:id";
+        $mod_value = array('id' => $_GET['id']);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($mod_value);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result[0]);
+        echo json_encode(array('n' => $result[0]['n']));
         exit();
     default:
         echo json_encode(array('result' => 'failure'));
