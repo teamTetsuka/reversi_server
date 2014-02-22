@@ -1,7 +1,4 @@
 <?php
-function json($array = array('result' => 'failure')){
-}
-
 if($_SERVER['REQUEST_METHOD'] != 'GET'){
     echo json_encode(array('result' => 'failure'));
 }
