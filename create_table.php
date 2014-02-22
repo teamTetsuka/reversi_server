@@ -61,10 +61,13 @@ $sql = "SELECT * FROM bracket";
 $params = array('p' => 3);
 $stmt = $pdo->prepare($sql);
 if($stmt->execute($params)){
+    var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+    echo "<br />";
     var_dump(json_encode($stmt->fetchAll(PDO::FETCH_ASSOC)));
 } else{
-    echo "ダミーデータ取得失敗<br />";
+    echo "ダミーデータ取得失敗";
 }
+echo "<br />";
 
 $sql = "ALTER TABLE bracket CHANGE id id INT(4) AUTO_INCREMENT";
 $stmt = $pdo->prepare($sql);
